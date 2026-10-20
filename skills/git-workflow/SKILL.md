@@ -2,7 +2,7 @@
 name: git-workflow
 description: Common git workflows and automation patterns for individuals and teams
 version: 1.0.0
-author: James Watt
+author: James Watt, Hermes Agent
 license: MIT
 platforms: [macos, linux]
 metadata:
@@ -14,6 +14,7 @@ metadata:
 # Git Workflow Skill
 
 ## When to Use
+
 - Automating common git operations (branch management, PR creation, merge conflicts)
 - Standardizing team git practices
 - Reducing repetitive git command typing
@@ -21,6 +22,7 @@ metadata:
 ## Procedure
 
 ### Branch Management
+
 ```bash
 # Create and switch to a new branch
 git checkout -b feature/new-feature
@@ -37,6 +39,7 @@ git branch --merged main | grep -v "\*\|main\|dev" | xargs -n1 git branch -d
 ```
 
 ### Pull Request Workflow
+
 ```bash
 # Start PR workflow
 git checkout -b feature/awesome-feature
@@ -51,6 +54,7 @@ git branch -d feature/awesome-feature
 ```
 
 ### Conflict Resolution
+
 ```bash
 # When merge conflict occurs
 git status
@@ -63,11 +67,13 @@ git merge feature/feature-branch
 ```
 
 ## Pitfalls
+
 - **Force pushing to shared branches** — avoids rewriting history for teammates
 - **Not pulling before pushing** — always pull main before pushing feature branches
 - **Commit messages too vague** — use imperative mood: "Fix bug" not "Fixed bug"
 
 ## Verification
+
 ```bash
 # Test branch creation
 git checkout -B test-branch && git branch
@@ -78,13 +84,15 @@ git push -u origin test-branch
 # Verify upstream is set
 git branch -vv
 ```
+
 Expected: test-branch shows `[ahead N, behind N]` with upstream tracked.
 
 # Common Commands Reference
-| Command | Purpose |
-|---|---|
-| `git checkout -b <name>` | Create and switch to new branch |
-| `git push -u origin <name>` | Push and set upstream |
-| `git pull --rebase` | Update branch cleanly |
-| `git request-pull` | Generate pull request summary |
-| `git bisect` | Binary search for regressions |
+
+| Command                     | Purpose                         |
+| --------------------------- | ------------------------------- |
+| `git checkout -b <name>`    | Create and switch to new branch |
+| `git push -u origin <name>` | Push and set upstream           |
+| `git pull --rebase`         | Update branch cleanly           |
+| `git request-pull`          | Generate pull request summary   |
+| `git bisect`                | Binary search for regressions   |

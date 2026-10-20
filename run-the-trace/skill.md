@@ -3,7 +3,7 @@ name: run-the-trace
 description: "Evaluate a skill's impact by running a task with and without it, then report/compare outputs"
 category: software-development
 version: 1.0.0
-author: James Watt
+author: James Watt, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
 metadata:

@@ -3,7 +3,7 @@ name: skill-evaluator
 description: "Analyze run-the-trace JSON records to compute skill effectiveness metrics, and auto-pin/archive skills based on performance data"
 category: software-development
 version: 1.0.0
-author: James Watt
+author: James Watt, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
