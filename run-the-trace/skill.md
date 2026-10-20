@@ -12,7 +12,7 @@ metadata:
     related_skills: []
 ---
 
-# run_the_trace Skill
+# run-the-trace Skill
 
 Evaluate new skills when Hermes agent first loads and uses them. This skill attempts to execute a task using a target skill, then re-executes the task not using the skill, and reports the output to the screen or records it.
 
@@ -27,17 +27,17 @@ Evaluate new skills when Hermes agent first loads and uses them. This skill atte
 
 ```bash
 # Load this skill (if using Hermes CLI)
-hermes --skills run_the_trace
+hermes --skills run-the-trace
 
 # Or load interactively
-/skill run_the_trace
+/skill run-the-trace
 
 # Provide a task when prompted
 # The skill will:
 #   1. Run the task without the target skill active
 #   2. Run the same task with the target skill enabled
 #   3. Compare outputs and report differences
-#   4. Record a trace JSON to ~/.hermes/traces/run_the_trace_<timestamp>.json
+#   4. Record a trace JSON to ~/.hermes/traces/run-the-trace_<timestamp>.json
 ```
 
 ## How it works
@@ -85,7 +85,7 @@ The file is saved to `~/.hermes/traces/` and a summary is printed to your screen
 ## Example
 
 ```bash
-/skill run_the_trace
+/skill run-the-trace
 #? Task: Evaluate my-governance-skill: Research Python web frameworks with security focus and compare them
 ```
 
@@ -102,7 +102,7 @@ The skill will:
 - Run the research task **with** skills active (your full skillset loaded)
 - Run the same research task **with** only minimal skills (the target skill disabled)
 - Print a side-by-side comparison
-- Save `run_the_trace_20261020_143000.json` to your traces directory
+- Save `run-the-trace_20261020_143000.json` to your traces directory
 
 ## Why this matters
 
@@ -120,7 +120,7 @@ In the context you work in, this could trace whether a governance skill improves
 If you want the skill to auto-execute the with/without-trace comparison (rather than requiring manual terminal runs), place a `scripts/` directory alongside this `.md`:
 
 ```
-run_the_trace/
+run-the-trace/
 ├── SKILL.md     ← this file
 └── scripts/
     └── run_trace.py
@@ -130,7 +130,7 @@ The **minimal** `scripts/run_trace.py` that Hermes can discover and run:
 
 ```python
 #!/usr/bin/env python3
-"""Minimal run_the_trace execution logic — absolutely bare baseline."""
+"""Minimal run-the-trace execution logic — absolutely bare baseline."""
 
 import json, os, time
 from datetime import datetime
@@ -168,7 +168,7 @@ def run_trace(task: str):
     }
 
     # --- persist ---
-    filename = f"run_the_trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    filename = f"run-the-trace_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     path = os.path.join(traces_dir, filename)
     with open(path, "w") as f:
         json.dump(record, f, indent=2)
@@ -212,7 +212,7 @@ When you load and run this skill, the following sequence occurs:
    - Tool calls made (list of tool names, e.g. `[\"terminal\"]` or `[\"terminal\", \"web_search\"]`)
    - Success/failure boolean
 6. **Comparison & print** — a side-by-side summary is printed to your terminal screen, with the baseline (without-skill) run listed first
-7. **Trace JSON saved** — a file like `run_the_trace_20261020_143000.json` is written to `~/.hermes/traces/`, with `without_skill` listed before `with_skill` in the record to reflect execution order
+7. **Trace JSON saved** — a file like `run-the-trace_20261020_143000.json` is written to `~/.hermes/traces/`, with `without_skill` listed before `with_skill` in the record to reflect execution order
 8. **Return to chat** — you're back in the Hermes conversation, and the trace file is available for the curator/analysis
 
 > **Why this order matters**: In experimental design, administering a treatment (with-skill) before a control (without-skill) can bias the control results through carryover — the model "remembers" the task context from the first run. By running **without skill first**, you get a pristine baseline, and the second run (with skill) shows the genuine delta the skill adds. The trace record reflects this order: `without_skill` then `with_skill`.
@@ -223,28 +223,28 @@ When you load and run this skill, the following sequence occurs:
 
 | Action                                     | CLI                             | Slash                  |
 | ------------------------------------------ | ------------------------------- | ---------------------- |
-| Load the skill                             | `hermes --skills run_the_trace` | `/skill run_the_trace` |
+| Load the skill                             | `hermes --skills run-the-trace` | `/skill run-the-trace` |
 | Unload all skills (for "without" baseline) | `hermes --skills ""`            | `/skill unload`        |
 | List installed skills                      | `hermes skills list`            | `/skills`              |
 | View trace files                           | `ls ~/.hermes/traces/`          | (open file manually)   |
 
 > **Pitfall**: When loading multiple skills, use **comma-separated** names with `--skills`, not spaces.
-> `hermes --skills run_the_trace,skill_evaluator` — correct
-> `hermes --skills run_the_trace skill_evaluator` — Hermes parses `skill_evaluator` as a CLI command, not a skill name (causes `hermes: 'run_the_trace' is not a hermes command` error).
+> `hermes --skills run-the-trace,skill_evaluator` — correct
+> `hermes --skills run-the-trace skill_evaluator` — Hermes parses `skill_evaluator` as a CLI command, not a skill name (causes `hermes: 'run-the-trace' is not a hermes command` error).
 
-> **Why**: Hermes's `--skills` flag tokenizes on whitespace. Commas in the value are preserved as part of a single argument, so `hermes --skills haiku run_the_trace` is interpreted as three separate flags/arguments. Always use `hermes --skills skill1,skill2,skill3` or load skills interactively via `/skill name` after session start.
+> **Why**: Hermes's `--skills` flag tokenizes on whitespace. Commas in the value are preserved as part of a single argument, so `hermes --skills haiku run-the-trace` is interpreted as three separate flags/arguments. Always use `hermes --skills skill1,skill2,skill3` or load skills interactively via `/skill name` after session start.
 
 > **Typical interactive flow** (shortened):
 
 > ```bash
-> $ hermes --skills run_the_trace
+> $ hermes --skills run-the-trace
 > ? Provide a task: Research Python web frameworks with security focus and compare them
 >
 > [Without-skill baseline run starts] … (Hermes uses minimal tools only, first run)
 > [With-skill run starts] … (Hermes uses your full skillset, second run)
 >
 > ✓ Comparison printed above (baseline first, then with-skill delta)
-> ✓ Trace saved to ~/.hermes/traces/run_the_trace_20261020_143000.json
+> ✓ Trace saved to ~/.hermes/traces/run-the-trace_20261020_143000.json
 > ```
 
 ## Related
@@ -254,20 +254,20 @@ When you load and run this skill, the following sequence occurs:
 - **Hermes profiling** — `hermes insights` shows usage analytics across sessions
 
 > **Pitfall**: When loading multiple skills, use **comma-separated** names with `--skills`, not spaces.
-> `hermes --skills run_the_trace,skill_evaluator` — correct
-> `hermes --skills run_the_trace skill_evaluator` — Hermes parses `skill_evaluator` as a CLI command, not a skill name (causes `hermes: 'run_the_trace' is not a hermes command` error).
+> `hermes --skills run-the-trace,skill_evaluator` — correct
+> `hermes --skills run-the-trace skill_evaluator` — Hermes parses `skill_evaluator` as a CLI command, not a skill name (causes `hermes: 'run-the-trace' is not a hermes command` error).
 
-> **Why**: Hermes's `--skills` flag tokenizes on whitespace. Commas in the value are preserved as part of a single argument, so `hermes --skills haiku run_the_trace` is interpreted as three separate flags/arguments. Always use `hermes --skills skill1,skill2,skill3` or load skills interactively via `/skill name` after session start.
+> **Why**: Hermes's `--skills` flag tokenizes on whitespace. Commas in the value are preserved as part of a single argument, so `hermes --skills haiku run-the-trace` is interpreted as three separate flags/arguments. Always use `hermes --skills skill1,skill2,skill3` or load skills interactively via `/skill name` after session start.
 
 Typical interactive flow (shortened):
 
 ```bash
-$ hermes --skills run_the_trace
+$ hermes --skills run-the-trace
 ? Provide a task: Research Python web frameworks with security focus and compare them
 
 [Without-skill baseline run starts] … (Hermes uses minimal tools only, first run)
 [With-skill run starts] … (Hermes uses your full skillset, second run)
 
 ✓ Comparison printed above (baseline first, then with-skill delta)
-✓ Trace saved to ~/.hermes/traces/run_the_trace_20261020_143000.json
+✓ Trace saved to ~/.hermes/traces/run-the-trace_20261020_143000.json
 ```
