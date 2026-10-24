@@ -1,1 +1,159 @@
+# =============================================================================
+# Python/Hermes Project .gitignore
+# ---------------------------------
+# Always commit this file to the repository so all team members have the same
+# ignore rules. Do NOT add this file to .gitignore itself.
+# =============================================================================
+
+# =============================================================================
+# Environment & Sensitive Data
+# =============================================================================
+.env
+*.env
+.env.*
+!.env.example  # Keep example env files if you have them
+
+# Secure keys and tokens
+.secret
+**/secure*
+**/*.key
+**/*.pem
+
+# =============================================================================
+# Package & Dependency Cache
+# =============================================================================
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Pip-wheel cache
+pip-cache/
+wheelhouse/
+
+# Poetry
+.poetry/
+
+# Conda
+conda-meta/
+anaconda3/
+
+# =============================================================================
+# IDE & Editor Files
+# =============================================================================
+# VS Code
+.vscode/*
+!/vscode/settings.json  # Keep settings if you want to share them
+# .code-workspace (keep if you use multi-root workspaces)
+# Extensions in .vscode/extensions if you want to track them
+
+# PyCharm
+.idea/
+*.iws
+
+# Neovim
+.nvim/
+# Vim
+.vim/
+
+# Atom
+# atom/
+
+# =============================================================================
+# Build & Distribution
+# =============================================================================
+# Installer logs
+logs/
+
+# Wheel wheels
+*.whl
+
+# Distribution packages
+dist/
+build/
+eggs/
+
+# Sdist
+*.egg-info/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Sentry
+sentry-*.js
+
+# =============================================================================
+# OS-Specific
+# =============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LMI
+
+# Windows
+Thumbs.db
+ehthumbs.db
+ehthumbs.db2
+Icon*
+
+# Linux
+# .directory-owner.txt
+
+# =============================================================================
+# Hermes-Specific
+# =============================================================================
+# Dirac cache
 .dirac-cache/
+
+# Hermes traces (if you don't want them in repo)
+# ~/.hermes/traces/  # Only if you don't want trace files in repo
+
+# Hermes skill cache
+.hermes/cache/
+
+# =============================================================================
+# Miscellaneous
+# =============================================================================
+# Jupyter notebook output
+output_*.txt
+nboutput/
+
+# Colab notebooks
+.colab/
+
+# Spyder project settings
+.spyderproject
+.spyderworkspace
+
+# Pyzo
+pyzo.cfg
+
+# Rope workspace
+.ropeproject/
+
+# mkdocs documentation
+/site/
+/docs/
+
+# Jekyll
+# jekyll/
+
+# Docusaurus
+# /website
+
+# =============================================================================
+# End of .gitignore
+# =============================================================================
